@@ -3,6 +3,7 @@ const {
   createTask,
   updateTask,
   deleteTask,
+  deleteTasks,
 } = require("../services/task-services");
 
 const getAllTasks = async (req, res) => {
@@ -59,4 +60,22 @@ const deleteOneTask = async (req, res) => {
   }
 };
 
-module.exports = { getAllTasks, createOneTask, updateOneTask, deleteOneTask };
+const deleteAllTasks = async (req, res) => {
+  try {
+    const deleteResult = await deleteTasks();
+    res.status(200).send(deleteResult);
+  } catch (error) {
+    res.status(400).send({
+      message: "Failed to delete all the tasks",
+      statusCode: 400,
+    });
+  }
+};
+
+module.exports = {
+  getAllTasks,
+  createOneTask,
+  updateOneTask,
+  deleteOneTask,
+  deleteAllTasks,
+};
