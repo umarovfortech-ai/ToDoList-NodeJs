@@ -9,7 +9,7 @@ const validationText = [
     .notEmpty()
     .withMessage("Text cannot be empty"),
 
-  validatorResult(),
+  validatorResult,
 ];
 
 module.exports = {

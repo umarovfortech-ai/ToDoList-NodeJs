@@ -11,7 +11,7 @@ const {
 
 router.get("/", getAllTasks);
 router.post("/", validationText, createOneTask);
-router.patch("/", validationText, updateOneTask);
-router.delete("/", deleteOneTask);
+router.patch("/:id", validationText, updateOneTask);
+router.delete("/:id", deleteOneTask);
 
 module.exports = router;

@@ -32,7 +32,8 @@ const createOneTask = async (req, res) => {
 };
 
 const updateOneTask = async (req, res) => {
-  const { id, text } = req.body;
+  const { text } = req.body;
+  const { id } = req.params;
 
   try {
     const updatedTask = await updateTask(id, text);
@@ -47,8 +48,7 @@ const updateOneTask = async (req, res) => {
 
 const deleteOneTask = async (req, res) => {
   try {
-    const { id } = req.body;
-
+    const { id } = req.params;
     const deletedTask = await deleteTask(id);
     res.status(204).send(deletedTask);
   } catch (error) {
