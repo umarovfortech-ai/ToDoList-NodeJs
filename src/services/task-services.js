@@ -12,10 +12,10 @@ const createTask = async (text) => {
   return savedTask;
 };
 
-const updateTask = async (id, text) => {
+const updateTask = async (id, text, isCheck) => {
   const updatedTask = await Task.findByIdAndUpdate(
     id,
-    { text },
+    { text, isCheck },
     { new: true },
   );
 

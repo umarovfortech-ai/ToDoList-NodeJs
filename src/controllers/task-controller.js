@@ -33,11 +33,11 @@ const createOneTask = async (req, res) => {
 };
 
 const updateOneTask = async (req, res) => {
-  const { text } = req.body;
+  const { text, isCheck } = req.body;
   const { id } = req.params;
 
   try {
-    const updatedTask = await updateTask(id, text);
+    const updatedTask = await updateTask(id, text, isCheck);
     res.status(200).send(updatedTask);
   } catch (error) {
     res.status(400).send({
