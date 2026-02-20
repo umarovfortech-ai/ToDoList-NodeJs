@@ -10,7 +10,6 @@ app.use("/", apiRoutes);
 const loadApp = async () => {
   try {
     await mongoose.connect(DB_CONNECTION);
-    console.log("Connected to DB");
 
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (error) {

@@ -10,38 +10,52 @@ const getAllTasks = async (req, res) => {
     const tasks = await getTasks();
     res.status(200).send(tasks);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({
+      message: "Failed to get the task",
+      statusCode: 400,
+    });
   }
 };
 
 const createOneTask = async (req, res) => {
   try {
     const { text } = req.body;
+
     const task = await createTask(text);
-    res.status(200).send(task);
+    res.status(201).send(task);
   } catch (error) {
-    res.status(400).send("Failed to create task");
+    res.status(400).send({
+      message: "Failed to create the task",
+      statusCode: 400,
+    });
   }
 };
 
-const updateOneTask = async (request, response) => {
-  const { id, text } = request.body;
+const updateOneTask = async (req, res) => {
+  const { id, text } = req.body;
+
   try {
     const updatedTask = await updateTask(id, text);
-    response.status(200).send(updatedTask);
+    res.status(200).send(updatedTask);
   } catch (error) {
-    console.log(error);
-    response.status(400).send("Failed to update task");
+    res.status(400).send({
+      message: "Failed to get the task",
+      statusCode: 400,
+    });
   }
 };
 
-const deleteOneTask = async (request, response) => {
+const deleteOneTask = async (req, res) => {
   try {
-    const { id } = request.body;
+    const { id } = req.body;
+
     const deletedTask = await deleteTask(id);
-    response.status(200).send(deletedTask);
+    res.status(204).send(deletedTask);
   } catch (error) {
-    response.status(400).send("Failed to delete");
+    res.status(400).send({
+      message: "Failed to delete the task",
+      statusCode: 400,
+    });
   }
 };
 

@@ -13,7 +13,11 @@ const createTask = async (text) => {
 };
 
 const updateTask = async (id, text) => {
-  const updatedTask = await Task.findByIdAndUpdate(id, { text }, { new: true });
+  const updatedTask = await Task.findByIdAndUpdate(
+    id,
+    { text },
+    { new: true },
+  );
 
   return updatedTask;
 };
