@@ -1,7 +1,8 @@
 const {
   getTasks,
   createTask,
-  updateTask,
+  updateOneTaskText,
+  updateOneTaskState,
   deleteTask,
   deleteTasks,
 } = require("../services/task-services");
@@ -32,12 +33,27 @@ const createOneTask = async (req, res) => {
   }
 };
 
-const updateOneTask = async (req, res) => {
-  const { text, isCheck } = req.body;
-  const { id } = req.params;
-
+const updateTaskText = async (req, res) => {
   try {
-    const updatedTask = await updateTask(id, text, isCheck);
+    const { text } = req.body;
+    const { id } = req.params;
+
+    const updatedTask = await updateOneTaskText(id, text);
+    res.status(200).send(updatedTask);
+  } catch (error) {
+    res.status(400).send({
+      message: "Failed to get the task",
+      statusCode: 400,
+    });
+  }
+};
+
+const updateTaskState = async (req, res) => {
+  try {
+    const { isCheck } = req.body;
+    const { id } = req.params;
+
+    const updatedTask = await updateOneTaskState(id, isCheck);
     res.status(200).send(updatedTask);
   } catch (error) {
     res.status(400).send({
@@ -50,6 +66,7 @@ const updateOneTask = async (req, res) => {
 const deleteOneTask = async (req, res) => {
   try {
     const { id } = req.params;
+
     const deletedTask = await deleteTask(id);
     res.status(204).send(deletedTask);
   } catch (error) {
@@ -75,7 +92,8 @@ const deleteAllTasks = async (req, res) => {
 module.exports = {
   getAllTasks,
   createOneTask,
-  updateOneTask,
+  updateTaskText,
+  updateTaskState,
   deleteOneTask,
   deleteAllTasks,
 };

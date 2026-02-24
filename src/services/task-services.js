@@ -12,10 +12,16 @@ const createTask = async (text) => {
   return savedTask;
 };
 
-const updateTask = async (id, text, isCheck) => {
+const updateOneTaskText = async (id, text) => {
+  const updatedTask = await Task.findByIdAndUpdate(id, { text }, { new: true });
+
+  return updatedTask;
+};
+
+const updateOneTaskState = async (id, isCheck) => {
   const updatedTask = await Task.findByIdAndUpdate(
     id,
-    { text, isCheck },
+    { isCheck },
     { new: true },
   );
 
@@ -35,7 +41,8 @@ const deleteTasks = async (id) => {
 module.exports = {
   getTasks,
   createTask,
-  updateTask,
+  updateOneTaskText,
+  updateOneTaskState,
   deleteTask,
   deleteTasks,
 };

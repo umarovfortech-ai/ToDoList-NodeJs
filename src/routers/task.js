@@ -5,15 +5,17 @@ const { validationText } = require("../middlewares/task-validation");
 const {
   getAllTasks,
   createOneTask,
-  updateOneTask,
+  updateTaskText,
+  updateTaskState,
   deleteOneTask,
   deleteAllTasks,
-} = require("../controllers/task-controller");
+} = require("../controllers/task");
 
-router.get("/", getAllTasks);
-router.post("/", validationText, createOneTask);
-router.patch("/:id", validationText, updateOneTask);
-router.delete("/", deleteAllTasks);
-router.delete("/:id", deleteOneTask);
+router.get("/task", getAllTasks);
+router.post("/task", validationText, createOneTask);
+router.patch("/task/text/:id", validationText, updateTaskText);
+router.patch("/task/state/:id", updateTaskState);
+router.delete("/task", deleteAllTasks);
+router.delete("/task/:id", deleteOneTask);
 
 module.exports = router;
